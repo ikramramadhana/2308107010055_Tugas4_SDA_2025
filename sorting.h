@@ -1,14 +1,11 @@
 // sorting.h
-// Berisi implementasi 6 algoritma sorting (angka dan kata)
-// Setiap fungsi dilengkapi komentar penjelasan
-
 #ifndef SORTING_H
 #define SORTING_H
 
-#include <stdio.h>
 #include <string.h>
 
-// Bubble Sort (angka)
+// ================= ANGKA =================
+
 void bubbleSort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
@@ -21,7 +18,6 @@ void bubbleSort(int arr[], int n) {
     }
 }
 
-// Selection Sort (angka)
 void selectionSort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
         int min_idx = i;
@@ -35,7 +31,6 @@ void selectionSort(int arr[], int n) {
     }
 }
 
-// Insertion Sort (angka)
 void insertionSort(int arr[], int n) {
     for (int i = 1; i < n; i++) {
         int key = arr[i];
@@ -48,24 +43,13 @@ void insertionSort(int arr[], int n) {
     }
 }
 
-// Merge Sort (angka)
 void merge(int arr[], int l, int m, int r) {
-    int n1 = m - l + 1;
-    int n2 = r - m;
+    int n1 = m - l + 1, n2 = r - m;
     int L[n1], R[n2];
-
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[l + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
-
+    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
+    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
     int i = 0, j = 0, k = l;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j])
-            arr[k++] = L[i++];
-        else
-            arr[k++] = R[j++];
-    }
+    while (i < n1 && j < n2) arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];
     while (i < n1) arr[k++] = L[i++];
     while (j < n2) arr[k++] = R[j++];
 }
@@ -79,21 +63,15 @@ void mergeSort(int arr[], int l, int r) {
     }
 }
 
-// Quick Sort (angka)
 int partition(int arr[], int low, int high) {
-    int pivot = arr[high];
-    int i = low - 1;
+    int pivot = arr[high], i = low - 1;
     for (int j = low; j < high; j++) {
         if (arr[j] < pivot) {
             i++;
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+            int tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
         }
     }
-    int temp = arr[i + 1];
-    arr[i + 1] = arr[high];
-    arr[high] = temp;
+    int tmp = arr[i + 1]; arr[i + 1] = arr[high]; arr[high] = tmp;
     return i + 1;
 }
 
@@ -105,12 +83,10 @@ void quickSort(int arr[], int low, int high) {
     }
 }
 
-// Shell Sort (angka)
 void shellSort(int arr[], int n) {
-    for (int gap = n / 2; gap > 0; gap /= 2) {
+    for (int gap = n/2; gap > 0; gap /= 2) {
         for (int i = gap; i < n; i++) {
-            int temp = arr[i];
-            int j;
+            int temp = arr[i], j;
             for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
                 arr[j] = arr[j - gap];
             arr[j] = temp;
@@ -118,9 +94,8 @@ void shellSort(int arr[], int n) {
     }
 }
 
-// Sorting String ======================================
+// ================= KATA =================
 
-// Bubble Sort (kata)
 void bubbleSortStr(char **arr, int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
@@ -133,7 +108,6 @@ void bubbleSortStr(char **arr, int n) {
     }
 }
 
-// Selection Sort (kata)
 void selectionSortStr(char **arr, int n) {
     for (int i = 0; i < n - 1; i++) {
         int min_idx = i;
@@ -147,7 +121,6 @@ void selectionSortStr(char **arr, int n) {
     }
 }
 
-// Insertion Sort (kata)
 void insertionSortStr(char **arr, int n) {
     for (int i = 1; i < n; i++) {
         char *key = arr[i];
@@ -160,24 +133,13 @@ void insertionSortStr(char **arr, int n) {
     }
 }
 
-// Merge Sort (kata)
 void mergeStr(char **arr, int l, int m, int r) {
-    int n1 = m - l + 1;
-    int n2 = r - m;
+    int n1 = m - l + 1, n2 = r - m;
     char *L[n1], *R[n2];
-
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[l + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
-
+    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
+    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
     int i = 0, j = 0, k = l;
-    while (i < n1 && j < n2) {
-        if (strcmp(L[i], R[j]) <= 0)
-            arr[k++] = L[i++];
-        else
-            arr[k++] = R[j++];
-    }
+    while (i < n1 && j < n2) arr[k++] = (strcmp(L[i], R[j]) <= 0) ? L[i++] : R[j++];
     while (i < n1) arr[k++] = L[i++];
     while (j < n2) arr[k++] = R[j++];
 }
@@ -191,25 +153,16 @@ void mergeSortStr(char **arr, int l, int r) {
     }
 }
 
-void mergeSortStrWrapper(char **arr, int n) {
-    mergeSortStr(arr, 0, n - 1);
-}
-
-// Quick Sort (kata)
 int partitionStr(char **arr, int low, int high) {
     char *pivot = arr[high];
     int i = low - 1;
     for (int j = low; j < high; j++) {
         if (strcmp(arr[j], pivot) < 0) {
             i++;
-            char *temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+            char *tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
         }
     }
-    char *temp = arr[i + 1];
-    arr[i + 1] = arr[high];
-    arr[high] = temp;
+    char *tmp = arr[i + 1]; arr[i + 1] = arr[high]; arr[high] = tmp;
     return i + 1;
 }
 
@@ -221,13 +174,8 @@ void quickSortStr(char **arr, int low, int high) {
     }
 }
 
-void quickSortStrWrapper(char **arr, int n) {
-    quickSortStr(arr, 0, n - 1);
-}
-
-// Shell Sort (kata)
 void shellSortStr(char **arr, int n) {
-    for (int gap = n / 2; gap > 0; gap /= 2) {
+    for (int gap = n/2; gap > 0; gap /= 2) {
         for (int i = gap; i < n; i++) {
             char *temp = arr[i];
             int j;
