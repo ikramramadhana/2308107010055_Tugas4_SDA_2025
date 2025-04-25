@@ -18,4 +18,8 @@ Setiap algoritma diimplementasikan dalam file `sorting.h`, dan diuji performanya
 ---
 
 ## 📁 Struktur Folder
+Main.c
+sorting.h
+data_angka.txt
+data_kata.txt
 
